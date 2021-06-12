@@ -1,0 +1,143 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  echo = FALSE
+)
+
+library(magrittr)
+
+main_repo <- "202104-intro-ml"
+turma <- "202104-intro-ml"
+num_aula <- 1
+```
+
+## Referências do curso
+
+[Clique aqui](https://github.com/curso-r/202104-intro-ml/archive/refs/heads/master.zip) para baixar o material do curso.
+
+### Programação em R
+
+- [Livro da Curso-R (Curso-R)](https://livro.curso-r.com/)
+- [Tidyverse (Wickham H)](https://www.tidyverse.org/)
+- [R for Data Science (Wickham H)](https://r4ds.had.co.nz/)
+- [Advanced R (Wickham H)](https://adv-r.hadley.nz/)
+
+### Machine Learning
+
+- [Introduction to Statistical Learning (Hastie, et al)](http://faculty.marshall.usc.edu/gareth-james/ISL/ISLR%20Seventh%20Printing.pdf)
+- [Elements of Statistical Learning (Hastie, et al)](https://web.stanford.edu/~hastie/Papers/ESLII.pdf)
+- [Computer Age Statistical Inference (Hastie, Efron)](https://web.stanford.edu/~hastie/CASI_files/PDF/casi.pdf)
+- [Tidymodels (Kuhn, et al)](https://www.tmwr.org/)
+- [Feature Engineering and Selection: A Practical Approach for Predictive Models (Kuhn, Kjell)](http://www.feat.engineering/)
+- [Kaggle](https://www.kaggle.com/)
+
+### Miscelânea
+
+- [Tidytext (Silges, et al)](https://www.tidytextmining.com/)
+
+- Nosso blog: [https://curso-r.com/blog/](https://curso-r.com/blog/)
+
+## Dúvidas
+
+Fora do horário de aula ou monitoria:
+
+- perguntas gerais sobre o curso deverão ser feitas no Classroom.
+
+- perguntas sobre R, principalmente as que envolverem código, deverão ser enviadas no [nosso fórum](https://discourse.curso-r.com/).
+
+## Slides
+
+```{r}
+knitr::kable(
+  tibble::tibble(
+    slide = CursoRutils:::list_github_files(main_repo, "slides/", "\\.html"),
+    link = paste0("https://curso-r.github.io/", main_repo, "/", slide)
+  ) %>% 
+    dplyr::filter(!stringr::str_detect(slide, "_files/"))
+)
+```
+
+
+## Scripts utilizados em aula
+
+```{r}
+pasta <- "exemplos/"
+knitr::kable(
+  tibble::tibble(
+    script = list.files(pasta, pattern = "R$"),
+    link = paste0("https://curso-r.github.io/", turma, "/", pasta, script)
+  ) 
+)
+```
+
+## Material extra
+
+Referências extras comentadas nas aulas.
+
+```{r, eval = FALSE}
+readxl::read_excel("referencias_extras.xlsx") %>%
+  dplyr::filter(aula <= num_aula, tema != "Conversa/Dúvidas") %>% 
+  dplyr::mutate(link = glue::glue("[{desc}]({url})")) %>%
+  dplyr::select(-desc, -url) %>%
+  dplyr::arrange(num_aula) %>% 
+  knitr::kable(col.names = c("Aula", "Tema", "Descrição"))
+```
+
+Materiais que comentamos quando tiramos dúvidas (não necessariamente são relacionadas com o conteúdo da aula).
+
+```{r, eval = FALSE}
+readxl::read_excel("referencias_extras.xlsx") %>%
+  dplyr::filter(aula <= num_aula, tema == "Conversa/Dúvidas") %>% 
+  dplyr::mutate(link = glue::glue("[{desc}]({url})")) %>%
+  dplyr::select(-desc, -url) %>%
+  knitr::kable(col.names = c("Aula", "Tema", "Descrição"))
+```
+
+## Dependências
+
+Este curso utiliza as seguintes dependências além do R e do RStudio:
+
+```{r, eval = FALSE, echo = TRUE}
+install.packages('tidyverse')
+install.packages('tidymodels')
+install.packages('rmarkdown')
+install.packages('knitr')
+install.packages('ISLR')
+install.packages('glmnet')
+install.packages('xgboost')
+install.packages('randomForest')
+install.packages('ranger')
+install.packages('rpart')
+install.packages('rpart.plot')
+install.packages('pROC')
+install.packages('vip')
+install.packages('modeldata')
+install.packages('usemodels')
+install.packages('tidypredict')
+install.packages('jpeg')
+install.packages('MASS')
+install.packages('DataExplorer')
+install.packages('skimr')
+install.packages('naniar')
+install.packages('patchwork')
+```
+
+
+## Redes sociais da Curso-R
+
+Instagram: https://www.instagram.com/cursoo_r/
+
+Twitter: https://twitter.com/curso_r
+
+Instagram: https://www.youtube.com/c/CursoR6/featured
+
+Linkedin: https://www.linkedin.com/company/curso-r/
+
+Facebook: https://www.facebook.com/cursodeR
