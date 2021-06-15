@@ -8,13 +8,11 @@ library(ggplot2)
 # Dados -------------------------------------------------------------------
 
 data("diamonds")
-
-
+=
 # pegando uma parte dos dados
 set.seed(1)
 base_inicial <- diamonds %>% 
   sample_n(10000)
-
 
 
 # Separar treino e teste --------------------------------------------------
@@ -90,6 +88,8 @@ especificacao_modelo_final
 
 
 # ajuste final ------------------------------------------------------------
+# Aqui os hiperparâmetros já foram ajustados em sua melhor perfomance, então
+# podemos fazer o ajuste final na base de treino.
 
 modelo_final <- fit(especificacao_modelo_final,
     y ~ x,
@@ -101,11 +101,13 @@ prp(modelo_final$fit)
 
 # calculo final do erro ---------------------------------------------------
 
+# Fazer predição na base de testes usando o modelo final
 base_teste_com_pred <- base_teste %>% 
   mutate(
     price_pred = predict(modelo_final, base_teste)$.pred
   )
 
+# Calculando métricas de erro
 base_teste_com_pred %>% 
   rmse(truth = price, estimate = price_pred)
 
