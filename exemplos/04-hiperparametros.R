@@ -6,6 +6,7 @@ library(tidymodels)
 # Dados -------------------------------------------------------------------
 data("diamonds")
 
+
 # base treino e teste -----------------------------------------------------
 set.seed(1)
 diamonds_initial_split <- diamonds %>% initial_split(3/4)
@@ -13,8 +14,11 @@ diamonds_initial_split <- diamonds %>% initial_split(3/4)
 diamonds_train <- training(diamonds_initial_split)
 diamonds_test <- testing(diamonds_initial_split)
 
+
 # definicao do modelo -----------------------------------------------------
 # passando parâmetros específicos das "engines"
+# aqui estamos tunando dois parâmetros ao mesmo tempo 
+
 diamonds_model <- decision_tree(
   cost_complexity = 0,
   min_n = tune(), 
@@ -22,6 +26,7 @@ diamonds_model <- decision_tree(
 ) %>% 
   set_engine("rpart") %>%
   set_mode("regression")
+
 
 # reamostragem com cross-validation ---------------------------------------
 diamonds_resamples <- vfold_cv(diamonds_train, v = 5)
